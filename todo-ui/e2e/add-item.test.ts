@@ -36,18 +36,18 @@ test.describe('Consumer tests', () => {
 
 			await page.waitForTimeout(1000);
 
-				await provider.addInteraction({
-					state: 'one item in the list',
-					uponReceiving: 'fetch one item',
-					withRequest: {
-						path: '/api/todos',
-						method: 'GET'
-					},
-					willRespondWith: {
-						status: 200,
-						body: { todos: ['buy some milk'] }
-					}
-				});
+			await provider.addInteraction({
+				state: 'one item in the list',
+				uponReceiving: 'fetch one item',
+				withRequest: {
+					path: '/api/todos',
+					method: 'GET'
+				},
+				willRespondWith: {
+					status: 200,
+					body: { todos: ['buy some milk'] }
+				}
+			});
 
 			await page.goto('/');
 

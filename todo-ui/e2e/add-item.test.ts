@@ -36,15 +36,23 @@ test.describe('Consumer tests', () => {
 
 			await page.waitForTimeout(1000);
 
-			await itemInput.fill('buy fruits');
-			await addItemBtn.click();
-
-			await page.waitForTimeout(1000);
+				await provider.addInteraction({
+					state: 'one item in the list',
+					uponReceiving: 'fetch one item',
+					withRequest: {
+						path: '/api/todos',
+						method: 'GET'
+					},
+					willRespondWith: {
+						status: 200,
+						body: { todos: ['buy some milk'] }
+					}
+				});
 
 			await page.goto('/');
 
 			const items = await page.getByTestId('todos').locator('li').all();
-			expect(items.length).toBe(2);
+			expect(items.length).toBe(1);
 
 			const item = page.getByTestId('todos').locator('ul > li').first();
 			await expect(item).toHaveText('buy some milk');

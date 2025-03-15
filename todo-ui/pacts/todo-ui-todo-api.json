@@ -4,12 +4,21 @@
   },
   "interactions": [
     {
-      "description": "",
+      "description": "fetch one item",
+      "providerState": "one item in the list",
       "request": {
         "method": "GET",
-        "path": "/"
+        "path": "/api/todos"
       },
       "response": {
+        "body": {
+          "todos": [
+            "buy some milk"
+          ]
+        },
+        "headers": {
+          "Content-Type": "application/json"
+        },
         "status": 200
       }
     }

@@ -1,7 +1,28 @@
 import { expect, test } from '@playwright/test';
+import { Pact } from '@pact-foundation/pact';
+import * as path from 'node:path';
+
+const provider = new Pact({
+	port: 3001,
+	dir: path.resolve(process.cwd(), 'pacts'),
+	log: path.resolve(process.cwd(), 'pacts', 'logs'),
+	consumer: 'todo-ui',
+	provider: 'todo-api',
+	pactfileWriteMode: 'overwrite'
+});
 
 test.describe('Consumer tests', () => {
 	test.setTimeout(10000);
+
+	test.beforeAll(async () => {
+		await provider.setup();
+	});
+
+	test.afterAll(async () => {
+		await provider.finalize().then(() => {
+			provider.writePact()
+		})
+	});
 
 	test.describe('Add item', async () => {
 		test('two items expecting to added to list', async ({ page }) => {
@@ -29,6 +50,19 @@ test.describe('Consumer tests', () => {
 		});
 
 		test('check persisted items', async ({ page }) => {
+			await provider.addInteraction({
+				state: 'empty todo list',
+				uponReceiving: 'add todo item',
+				withRequest: {
+					path: '/api/todos',
+					method: 'POST',
+					body: { todo: 'buy some milk' }
+				},
+				willRespondWith: {
+					status: 200
+				}
+			});
+
 			await page.goto('/');
 
 			const itemInput = page.getByTestId('add-item-input');

@@ -1,4 +1,4 @@
-import type { PageServerLoad } from './$types';
+import type { Actions, PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async () => {
 	let todos: string[] = [];
@@ -12,4 +12,19 @@ export const load: PageServerLoad = async () => {
 	}
 
 	return { todos };
+};
+
+export const actions: Actions = {
+	addItem: async ({ request }) => {
+		const data = await request.formData();
+		const todo = data.get('todo-item');
+
+		const body = JSON.stringify({ todo: todo });
+		await fetch('http://127.0.0.1:3001/api/todos', {
+			method: 'POST',
+			body: body
+		}).catch((err) => {
+			throw err;
+		});
+	}
 };

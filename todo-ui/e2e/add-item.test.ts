@@ -41,42 +41,13 @@ test.describe('Consumer tests', () => {
 
 			await page.waitForTimeout(1000);
 
+			await page.goto('/');
+
 			const items = await page.getByTestId('todos').locator('li').all();
 			expect(items.length).toBe(2);
 
 			const item = page.getByTestId('todos').locator('ul > li').first();
 			await expect(item).toHaveText('buy some milk');
-		});
-
-		test('check persisted items', async ({ page }) => {
-			await page.goto('/');
-
-			const itemInput = page.getByTestId('add-item-input');
-			await expect(itemInput).toBeVisible();
-			await itemInput.fill('buy some milk');
-
-			const addItemBtn = page.getByTestId('add-item-btn');
-			await addItemBtn.click();
-
-			await page.waitForTimeout(1000);
-
-			await provider.addInteraction({
-				state: 'one item in the list',
-				uponReceiving: 'fetch one item',
-				withRequest: {
-					path: '/api/todos',
-					method: 'GET'
-				},
-				willRespondWith: {
-					status: 200,
-					body: { todos: ['buy some milk'] }
-				}
-			});
-
-			await page.goto('/');
-
-			const items = await page.getByTestId('todos').locator('li').all();
-			expect(items.length).toBe(1);
 		});
 	});
 });

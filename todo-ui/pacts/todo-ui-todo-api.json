@@ -4,8 +4,25 @@
   },
   "interactions": [
     {
+      "description": "add todo item",
+      "providerState": "empty todo list",
+      "request": {
+        "body": {
+          "todo": "buy some milk"
+        },
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "method": "POST",
+        "path": "/api/todos"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
       "description": "fetch one item",
-      "providerState": "one item in the list",
+      "providerState": "empty todo list",
       "request": {
         "method": "GET",
         "path": "/api/todos"

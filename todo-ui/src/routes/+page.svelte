@@ -6,9 +6,11 @@
 
 	let { data } = $props();
 
-	data.todos.forEach((el: string) => {
-		todos.push(el);
-	});
+	if (data.todos && data.todos.length > 0) {
+		data.todos.forEach((el: string) => {
+			todos.push(el);
+		});
+	}
 </script>
 
 <article data-testid="add-item">
@@ -23,18 +25,18 @@
 			};
 		}}
 	>
-	<fieldset role="group">
-		<input
-			data-testid="add-item-input"
-			id="todo-item"
-			name="todo-item"
-			type="text"
-			placeholder="Add new todo"
-			aria-label="Add new todo"
-			bind:value={todo}
-		/>
-		<input data-testid="add-item-btn" type="submit" value="+Add" />
-	</fieldset>
+		<fieldset role="group">
+			<input
+				data-testid="add-item-input"
+				id="todo-item"
+				name="todo-item"
+				type="text"
+				placeholder="Add new todo"
+				aria-label="Add new todo"
+				bind:value={todo}
+			/>
+			<input data-testid="add-item-btn" type="submit" value="+Add" />
+		</fieldset>
 	</form>
 </article>
 

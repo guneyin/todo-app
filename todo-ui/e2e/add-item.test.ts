@@ -7,11 +7,11 @@ test.describe('Consumer tests', () => {
 		test('two items expecting to added to list', async ({ page }) => {
 			await page.goto('/');
 
-			const itemInput = page.getByTestId('itemInput');
+			const itemInput = page.getByTestId('add-item-input');
 			await expect(itemInput).toBeVisible()
 			await itemInput.fill('buy some milk');
 
-			const addItemBtn = page.getByTestId('addItemBtn');
+			const addItemBtn = page.getByTestId('add-item-btn');
 			await addItemBtn.click();
 
 			await page.waitForTimeout(1000);

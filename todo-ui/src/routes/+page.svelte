@@ -6,6 +6,7 @@
 <article data-testid="add-item">
     <fieldset role="group">
         <input
+                data-testid="add-item-input"
                 id="todo-item"
                 name="todo-item"
                 type="text"
@@ -13,7 +14,7 @@
                 aria-label="Add new todo"
                 bind:value={todo}
         />
-        <input type="submit" value="+Add" onclick={() => todos.push(todo)}/>
+        <input data-testid="add-item-btn" type="submit" value="+Add" onclick={() => todos.push(todo)}/>
     </fieldset>
 </article>
 

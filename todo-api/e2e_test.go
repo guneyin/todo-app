@@ -2,14 +2,16 @@ package main_test
 
 import (
 	"fmt"
-	"github.com/guneyin/todo-app/todo-api/handler"
-	"github.com/stretchr/testify/require"
 	"net/http"
 	"net/http/httptest"
 
-	pact "github.com/pact-foundation/pact-go/v2/provider"
+	"github.com/guneyin/todo-app/todo-api/handler"
+	"github.com/stretchr/testify/require"
+
 	"os"
 	"testing"
+
+	pact "github.com/pact-foundation/pact-go/v2/provider"
 )
 
 func mockServer() *httptest.Server {

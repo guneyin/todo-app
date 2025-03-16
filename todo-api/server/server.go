@@ -1,9 +1,12 @@
 package server
 
 import (
-	"github.com/guneyin/todo-app/todo-api/handler"
+	"fmt"
 	"log"
 	"net/http"
+	"time"
+
+	"github.com/guneyin/todo-app/todo-api/handler"
 )
 
 func StartServer(port string) error {
@@ -12,5 +15,12 @@ func StartServer(port string) error {
 	mux := http.NewServeMux()
 	handler.RegisterRoutes(mux)
 
-	return http.ListenAndServe(":"+port, mux)
+	server := &http.Server{
+		Addr:              fmt.Sprintf(":%s", port),
+		ReadHeaderTimeout: 5 * time.Second,
+		IdleTimeout:       120 * time.Second,
+		Handler:           mux,
+	}
+
+	return server.ListenAndServe()
 }

@@ -1,10 +1,11 @@
 package main
 
 import (
-	"github.com/guneyin/todo-app/todo-api/server"
-	_ "github.com/joho/godotenv/autoload"
 	"log"
 	"os"
+
+	"github.com/guneyin/todo-app/todo-api/server"
+	_ "github.com/joho/godotenv/autoload"
 )
 
 func main() {

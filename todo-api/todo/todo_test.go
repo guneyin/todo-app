@@ -1,9 +1,12 @@
 package todo_test
 
 import (
+	"testing"
+
+	"github.com/stretchr/testify/require"
+
 	"github.com/guneyin/todo-app/todo-api/todo"
 	"github.com/stretchr/testify/assert"
-	"testing"
 )
 
 func Test_ListItems(t *testing.T) {
@@ -11,7 +14,7 @@ func Test_ListItems(t *testing.T) {
 
 	item := "buy some milk"
 	added, err := svc.Add(item)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	assert.Equal(t, item, added)
 
 	items := svc.List()
@@ -24,7 +27,7 @@ func Test_AddItem(t *testing.T) {
 
 	item := "buy some milk"
 	added, err := svc.Add(item)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	assert.Equal(t, item, added)
 }
 
@@ -33,10 +36,10 @@ func Test_AddItem_Duplicate(t *testing.T) {
 
 	item := "buy some milk"
 	added, err := svc.Add(item)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	assert.Equal(t, item, added)
 
 	duplicated, err := svc.Add(item)
-	assert.Error(t, err)
+	require.Error(t, err)
 	assert.Empty(t, duplicated)
 }

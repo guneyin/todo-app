@@ -2,9 +2,10 @@ package handler
 
 import (
 	"encoding/json"
+	"net/http"
+
 	"github.com/guneyin/todo-app/todo-api/dto"
 	"github.com/guneyin/todo-app/todo-api/todo"
-	"net/http"
 )
 
 func RegisterRoutes(mux *http.ServeMux) {
@@ -12,7 +13,7 @@ func RegisterRoutes(mux *http.ServeMux) {
 	mux.HandleFunc("POST /api/todos", HandleSubmitTodo)
 }
 
-func HandleGetTodo(w http.ResponseWriter, r *http.Request) {
+func HandleGetTodo(w http.ResponseWriter, _ *http.Request) {
 	todoSvc := todo.Service()
 	todos := todoSvc.List()
 	response := dto.NewTodos(todos)

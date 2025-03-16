@@ -17,8 +17,6 @@ on:
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
-  GKE_CLUSTER: ${{ env.GKE_CLUSTER }}   # Add your cluster name here.
-  GKE_ZONE: ${{ env.GKE_ZONE }}   # Add your cluster zone here.
   DEPLOYMENT_NAME: gke-todo-ui # Add your deployment name here.
   IMAGE: todo-ui
 

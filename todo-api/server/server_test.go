@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/guneyin/todo-app/todo-api/dto"
-	"github.com/guneyin/todo-app/todo-api/server"
+	"github.com/guneyin/todo-app/todo-api/handler"
 	"github.com/stretchr/testify/assert"
 	"net/http"
 	"net/http/httptest"
@@ -14,8 +14,7 @@ import (
 
 func mockServer() *httptest.Server {
 	mux := http.NewServeMux()
-	mux.HandleFunc("GET /api/todos", server.HandleGetTodo)
-	mux.HandleFunc("POST /api/todos", server.HandleSubmitTodo)
+	handler.RegisterRoutes(mux)
 
 	return httptest.NewServer(mux)
 }

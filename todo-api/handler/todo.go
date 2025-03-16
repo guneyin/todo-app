@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/guneyin/todo-app/todo-api/logger"
+
 	"github.com/guneyin/todo-app/todo-api/dto"
 	"github.com/guneyin/todo-app/todo-api/todo"
 )
@@ -13,7 +15,9 @@ func RegisterRoutes(mux *http.ServeMux) {
 	mux.HandleFunc("POST /api/todos", HandleSubmitTodo)
 }
 
-func HandleGetTodo(w http.ResponseWriter, _ *http.Request) {
+func HandleGetTodo(w http.ResponseWriter, r *http.Request) {
+	logger.Log.Info(r.Method, "path", r.URL.String())
+
 	todoSvc := todo.Service()
 	todos := todoSvc.List()
 	response := dto.NewTodos(todos)
@@ -25,6 +29,8 @@ func HandleGetTodo(w http.ResponseWriter, _ *http.Request) {
 }
 
 func HandleSubmitTodo(w http.ResponseWriter, r *http.Request) {
+	logger.Log.Info(r.Method, "path", r.URL.String())
+
 	todoSvc := todo.Service()
 
 	todoItem := &dto.Todo{}

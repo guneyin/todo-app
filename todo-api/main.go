@@ -9,5 +9,5 @@ import (
 )
 
 func main() {
-	log.Fatal(server.StartServer(os.Getenv("PORT")))
+	log.Fatal(server.StartServer(os.Getenv("API_PORT")))
 }

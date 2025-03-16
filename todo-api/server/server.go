@@ -10,7 +10,7 @@ import (
 )
 
 func StartServer(port string) error {
-	log.Println("Starting server...")
+	log.Println("Starting server on port", port)
 
 	mux := http.NewServeMux()
 	handler.RegisterRoutes(mux)

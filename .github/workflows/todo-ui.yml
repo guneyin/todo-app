@@ -16,7 +16,7 @@ env:
   GKE_CLUSTER: todo-app
   GKE_REGION: europe-central2-a
 
-  GCP_SA_KEY: ${{ secrets.GKE_SA_KEY }}
+  GCP_SA_KEY: ${{ secrets.GCP_SA_JSON }}
 
 jobs:
   deploy-dev:

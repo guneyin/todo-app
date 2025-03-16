@@ -3,6 +3,7 @@ module github.com/guneyin/todo-app/todo-api
 go 1.23.1
 
 require (
+	github.com/joho/godotenv v1.5.1
 	github.com/pact-foundation/pact-go/v2 v2.3.0
 	github.com/stretchr/testify v1.10.0
 )

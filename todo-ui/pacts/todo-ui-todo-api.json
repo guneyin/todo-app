@@ -1,58 +1,56 @@
 {
-  "consumer": {
-    "name": "todo-ui"
-  },
-  "interactions": [
-    {
-      "description": "add todo item",
-      "providerState": "empty todo list",
-      "request": {
-        "body": {
-          "todo": "buy some milk"
-        },
-        "headers": {
-          "Content-Type": "application/json"
-        },
-        "method": "POST",
-        "path": "/api/todos"
-      },
-      "response": {
-        "status": 200
-      }
-    },
-    {
-      "description": "fetch one item",
-      "providerState": "empty todo list",
-      "request": {
-        "method": "GET",
-        "path": "/api/todos"
-      },
-      "response": {
-        "body": {
-          "todos": [
-            "buy some milk"
-          ]
-        },
-        "headers": {
-          "Content-Type": "application/json"
-        },
-        "status": 200
-      }
-    }
-  ],
-  "metadata": {
-    "pact-js": {
-      "version": "14.0.0"
-    },
-    "pactRust": {
-      "ffi": "0.4.22",
-      "models": "1.2.3"
-    },
-    "pactSpecification": {
-      "version": "2.0.0"
-    }
-  },
-  "provider": {
-    "name": "todo-api"
-  }
+	"consumer": {
+		"name": "todo-ui"
+	},
+	"interactions": [
+		{
+			"description": "add todo item",
+			"providerState": "empty todo list",
+			"request": {
+				"body": {
+					"todo": "buy some milk"
+				},
+				"headers": {
+					"Content-Type": "application/json"
+				},
+				"method": "POST",
+				"path": "/api/todos"
+			},
+			"response": {
+				"status": 200
+			}
+		},
+		{
+			"description": "fetch one item",
+			"providerState": "empty todo list",
+			"request": {
+				"method": "GET",
+				"path": "/api/todos"
+			},
+			"response": {
+				"body": {
+					"todos": ["buy some milk"]
+				},
+				"headers": {
+					"Content-Type": "application/json"
+				},
+				"status": 200
+			}
+		}
+	],
+	"metadata": {
+		"pact-js": {
+			"version": "14.0.0"
+		},
+		"pactRust": {
+			"ffi": "0.4.22",
+			"models": "1.2.3"
+		},
+		"pactSpecification": {
+			"version": "2.0.0"
+		}
+	},
+	"provider": {
+		"name": "todo-api"
+	}
 }

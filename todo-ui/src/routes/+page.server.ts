@@ -1,9 +1,10 @@
 import type { Actions, PageServerLoad } from './$types';
+import { env } from '$env/dynamic/public';
 
 export const load: PageServerLoad = async () => {
 	let todos: string[] = [];
 
-	const fetched = await fetch('http://127.0.0.1:3001/api/todos')
+	const fetched = await fetch(`http://${env.PUBLIC_API_URL}/api/todos`)
 		.then((res) => res.json())
 		.catch((err) => console.log(err));
 
@@ -20,9 +21,12 @@ export const actions: Actions = {
 		const todo = data.get('todo-item');
 
 		const body = JSON.stringify({ todo: todo });
-		await fetch('http://127.0.0.1:3001/api/todos', {
+		await fetch(`http://${env.PUBLIC_API_URL}/api/todos`, {
 			method: 'POST',
-			body: body
+			body: body,
+			headers: {
+				'Content-Type': 'application/json'
+			}
 		}).catch((err) => {
 			throw err;
 		});

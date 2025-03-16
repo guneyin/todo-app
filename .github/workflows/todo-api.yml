@@ -14,13 +14,13 @@ on:
     branches:
       - main
     paths:
-      - 'todo-ui/**'
+      - 'todo-api/**'
   workflow_dispatch:
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
-  DEPLOYMENT_NAME: gke-todo-ui # Add your deployment name here.
-  IMAGE: todo-ui
+  DEPLOYMENT_NAME: gke-todo-api # Add your deployment name here.
+  IMAGE: todo-api
 
 jobs:
   setup-build-publish-deploy:
@@ -53,7 +53,7 @@ jobs:
       # Build the Docker image
       - name: Build
         run: |-
-          cd todo-ui
+          cd todo-api
           docker build \
             --tag "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA" \
             --build-arg GITHUB_SHA="$GITHUB_SHA" \
@@ -63,7 +63,7 @@ jobs:
       # Push the Docker image to Google Container Registry
       - name: Publish
         run: |-
-          cd todo-ui
+          cd todo-api
           docker push "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA"
 
       # Set up kustomize

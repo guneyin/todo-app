@@ -27,6 +27,12 @@ func Service() *Todo {
 	return svc
 }
 
+func NewService() *Todo {
+	return &Todo{
+		items: make(map[string]struct{}),
+	}
+}
+
 func (t *Todo) List() []string {
 	return slices.Collect(maps.Keys(t.items))
 }

@@ -1,0 +1,19 @@
+services:
+  todo-ui:
+    container_name: todo-ui
+    build:
+      context: ./todo-ui
+    ports:
+      - "3000:3000"
+    environment:
+      - PUBLIC_API_URL=todo-api:3001
+      - ORIGIN=http://todo-ui
+
+  todo-api:
+    container_name: todo-api
+    build:
+      context: ./todo-api
+    ports:
+      - "3001:3001"
+    environment:
+      - API_PORT=3001

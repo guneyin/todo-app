@@ -16,7 +16,7 @@ env:
   GKE_CLUSTER: todo-app
   GKE_REGION: europe-central2-a
 
-  GCP_SA_KEY: ${{ secrets.GCP_SA_JSON }}
+  GCP_SA_JSON: ${{ secrets.GCP_SA_JSON }}
 
 jobs:
   deploy-dev:
@@ -40,14 +40,14 @@ jobs:
       - name: Authenticate to GCP
         uses: google-github-actions/auth@v2
         with:
-          credentials_json: ${GCP_SA_KEY}
+          credentials_json: ${GCP_SA_JSON}
           project_id: ${GCP_PROJECT_ID}
 
       - name: Set up Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
         with:
           project_id: ${GCP_PROJECT_ID}
-          service_account_key: ${GCP_SA_KEY}
+          service_account_key: ${GCP_SA_JSON}
 
       - name: Configure Docker to use the gcloud command-line tool as a credential helper
         run: gcloud auth configure-docker ${GCP_REGION}-docker.pkg.dev
